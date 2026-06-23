@@ -1,1 +1,1 @@
-you need to open https://www.hivemq.com/demos/websocket-client/ and subscribe to pin-control (the topic)
+you need to open https://www.hivemq.com/demos/websocket-client/ and subscribe to pin-control (the topic) , import the JSON file to n8n (https://n8n.io/?ps_partner_key=NzE3Zjk4NTc2ODIy&ps_xid=1TskPt8Ud1LZmZ&gsxid=1TskPt8Ud1LZmZ&gspk=NzE3Zjk4NTc2ODIy&gad_source=1&gad_campaignid=23397401030&gbraid=0AAAABCODLjuB6gLjqdCQ2hf48JMhSVAsQ&gclid=CjwKCAjw3ejRBhAdEiwADkqPn3rgp4YIwle5qREU17xHsFeJJl3uXfaDh2TpDaXcvu--JMthvEPSBBoCLE8QAvD_BwE) 
