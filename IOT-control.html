@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Control ESP32</title>
+  <style>
+    /* Styles for centering content */
+    .centered {
+      text-align: center;
+      margin-top: 50px;
+    }
+
+    /* Style for the label text */
+    .label {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+
+    /* Style for the buttons */
+    button {
+      margin: 0 10px;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    /* Style for the status feedback message */
+    #status-feedback {
+      margin-top: 20px;
+      font-family: Arial, sans-serif;
+      font-size: 14px;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+  <div class="centered">
+    <div class="label">IOT control</div>
+    
+    <button onclick="toggleLED('on')">Turn On</button>
+    
+    <button onclick="toggleLED('off')">Turn Off</button>
+
+    <div id="status-feedback">Ready. Click a button to test.</div>
+  </div>
+
+  <script>
+    /**
+     * Sends a GET request to an n8n webhook with the value as a query parameter.
+     * @param {string} action - 'on' or 'off'. This represents the action to perform.
+     */
+    function toggleLED(action) { 
+      const statusElement = document.getElementById('status-feedback');
+      statusElement.style.color = '#555';
+      statusElement.innerText = `Sending '${action}' command...`;
+
+      // Your Cloud n8n Production Webhook URL
+      // Change this line to use the production URL:
+	  const webhookUrl = `https://nada181.app.n8n.cloud/webhook/pin-control?value=${action}`;
+
+      // Use the Fetch API to send a GET request to the specified URL
+      fetch(webhookUrl)
+        .then(response => {
+          if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+          }
+          return response.text();
+        })
+        .then(data => {
+          console.log('Webhook response:', data);
+          statusElement.style.color = 'green';
+          statusElement.innerText = `Successfully sent '${action}' command!`;
+        })
+        .catch(error => {
+          console.error('Error sending webhook:', error);
+          statusElement.style.color = 'red';
+          statusElement.innerText = `Error sending command. Check network or n8n status.`;
+        });
+    }
+  </script>
+</body>
+</html>
